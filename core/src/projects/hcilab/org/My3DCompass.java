@@ -19,7 +19,10 @@ import com.badlogic.gdx.graphics.g3d.utils.CameraInputController;
 import com.badlogic.gdx.graphics.g3d.utils.ModelBuilder;
 import com.badlogic.gdx.math.Vector3;
 
+
 import java.util.HashMap;
+
+import sun.rmi.runtime.Log;
 
 import static com.badlogic.gdx.Gdx.input;
 
@@ -30,6 +33,7 @@ public class My3DCompass implements ApplicationListener, InputProcessor {
 	private CameraInputController camController;
 	private ModelBatch modelBatch;
 	private Model xAxisArrow, yAxisArrow, zAxisArrow, compassModel, gravityModel;
+	private float[] viewMatrix;
 
 	enum ModelKey {
 		XAXIS,
@@ -98,6 +102,8 @@ public class My3DCompass implements ApplicationListener, InputProcessor {
 
 	@Override
 	public void render () {
+		viewMatrix = cam.view.getValues();
+
 		camController.update();
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
 		if(input.isPeripheralAvailable(Input.Peripheral.Compass)){
@@ -155,6 +161,7 @@ public class My3DCompass implements ApplicationListener, InputProcessor {
 	public boolean touchUp(int screenX, int screenY, int pointer, int button) {
 		return false;
 	}
+
 
 	@Override
 	public boolean touchDragged(int screenX, int screenY, int pointer) {
