@@ -102,8 +102,9 @@ public class My3DCompass implements ApplicationListener, InputProcessor {
 
 	@Override
 	public void render () {
-		viewMatrix = cam.view.getValues();
-
+		float x = cam.direction.x;
+		float y = cam.direction.y;
+		float z = cam.direction.z;
 		camController.update();
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT | GL20.GL_DEPTH_BUFFER_BIT);
 		if(input.isPeripheralAvailable(Input.Peripheral.Compass)){
